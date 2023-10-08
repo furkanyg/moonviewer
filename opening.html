@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dönen Ay</title>
+    <link rel="icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .header {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .header img {
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .header img:last-child {
+            margin-right: 0;
+        }
+
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            font-weight: bold;
+            color: blanchedalmond;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            cursor: default;
+            transition: 0.5s;
+        }
+        .centered-text:hover{
+            color: rgb(255, 247, 131);
+            transition: 0.5s;
+        }
+        
+        .word {
+            margin: 0 10px;
+        }
+        
+        .cta {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px; /* Yazıyı daha büyük yap */
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: 0.5s;
+        }
+
+        .cta:hover {
+            color: rgb(255, 252, 167);
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: 0.5s;
+        }
+
+        .cta:focus {
+            color: rgb(0, 174, 0);
+        }
+
+        .corner-box.left-bottom .contact {
+            font-size: 17px;
+            color: rgb(207, 123, 255);
+        }
+
+        .corner-box.left-bottom {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            transition: 0.5s;
+            background-image: url(furkan.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .corner-box.right-bottom {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-image: url(ahmet.png);
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5); 
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            transition: 0.5s;
+        }
+
+        .corner-box.left-bottom:hover{
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: 0.5s;
+        }
+
+        .corner-box.right-bottom h2 {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .corner-box.left-bottom h2 {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+        a:hover{
+            color: rgb(169, 255, 251);
+            transition: 0.5s;
+        }
+        a:focus{
+            color: rgb(0, 255, 242);
+        }
+        .school-name {
+            position: absolute;
+            margin: 20px;
+            top: 10px;
+            right: 10px;
+            font-size: 24px; /* Yazıyı daha büyük yapabilirsiniz */
+            color: #fff; /* Yazı rengi */
+            font-family: 'Dela Gothic One', cursive;
+            font-family: 'Kanit', sans-serif; /* Kullanılan yazı tipi */
+            z-index: 2; /* Öne çıkma düzeyi */
+            transition: 0.5s;
+        }
+
+        .school-name:hover{
+            color: rgb(255, 237, 135);
+            transition: 0.5s;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .hasblogo{
+            width: 70px;
+            border-radius: 100%;
+            padding: 0px;
+            
+
+        }
+        #divhasbl{
+            display: inline-block ;
+            margin: 10px;
+            background-color: white;
+            width: 85px;
+            text-align: center;
+            border-radius: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <a href="https://haydogansbl.meb.k12.tr/" target="_blank">
+        <div style="float: right;" class="school-name">
+            Hidayet Aydoğan Sosyal Bilimler Lisesi <br>
+            Ahmet Fethi Öner
+        </div>
+    </a>
+    <div class="header">
+        <a href="https://www.nasa.gov/" target="_blank"><img src="nasa.png" alt="NASA Logo"></a>
+        <a href="https://www.spaceappschallenge.org/" target="_blank"><img src="spaceapp.png" alt="Space App Logo"></a>
+        <div id="divhasbl"><a href="https://haydogansbl.meb.k12.tr/" target="_blank"><img src="hasbl.png" class="hasblogo" alt=""></a></div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <div class="centered-text">
+        <span class="word">EXPLORE</span>
+        <span class="word">THE</span>
+        <span class="word">MOON</span>
+    </div>
+    <a class="cta" href="index.html">Have a Look ➔</a>
+
+    <div class="corner-box left-bottom">
+        <h2 style="font-size: 24px;">Furkan Yalçın</h2>
+        <p><a href="https://www.furkanyalcinn.com" target="_blank">Website</a></p>
+        <p><a href="https://www.instagram.com/thefurkanyn/" target="_blank">Instagram</a></p>
+    </div>
+
+    <div class="corner-box right-bottom">
+        <h2 style="font-size: 24px;">Ahmet Emin Atasoy</h2>
+        <p><a href="http://www.ahmetemin.rf.gd" target="_blank">Website</a></p>
+        <p><a href="https://www.instagram.com/ahmts000/" target="_blank">Instagram</a></p>
+    </div>
+
+    <script>
+        var scene = new THREE.Scene();
+
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var geometry = new THREE.SphereGeometry(2, 32, 32);
+
+        var texture = new THREE.TextureLoader().load('moon.jpg');
+        var material = new THREE.MeshPhongMaterial({
+            map: texture,
+            shininess: 5,
+            specular: new THREE.Color('gray'),
+            emissive: new THREE.Color('black')
+        });
+
+        var moon = new THREE.Mesh(geometry, material);
+        scene.add(moon);
+
+        var light = new THREE.SpotLight(0xffffff);
+        light.position.set(5, 5, 7);
+        scene.add(light);
+
+        var animate = function () {
+            requestAnimationFrame(animate);
+
+            moon.rotation.y += 0.002;
+
+            renderer.render(scene, camera);
+        };
+        
+
+        animate();
+        
+    </script>
+</body>
+</html>

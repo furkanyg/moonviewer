@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');/*Pixelify Sans*/
+/* rgb(76, 255, 76) yesil renk */
+/* rgb(255, 51, 36) kirmizi renk */
+html {
+    background-color: black;
+}
+#left-menu {
+    width: 300px;
+    border: 1px solid white;
+    position: fixed;
+    display: inline-block;
+    margin: 10px;
+    left: 0px;
+    right: 0px;
+}
+#sismic-menu {
+    border: 1px solid white;
+    width: 200px;
+    text-align: center;
+    position: fixed;
+    left: 0px;
+    margin: 10px;
+    top: 160px;
+    padding: 5px;
+}
+.button {
+    color: black;
+    font-size: 22px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    background-color: rgb(255, 51, 36);
+    font-family: 'Pixelify Sans', cursive;
+    cursor: pointer;
+}
+#oceansButton {
+    float: left;
+}
+#landingsButton {
+    float: right;
+}
+#gridButton {
+    padding: 10px 45px 10px 45px;
+    float: right;
+}
+#xRayButton {
+    float: left;
+    padding: 10px 25px 10px 30px;
+}
+#right-menu {
+
+    position: fixed;
+    display: inline-block;
+    width: 400px;
+    right: 10px;
+    top: 10px;
+}
+#imgRight {
+    width: 100%;
+    transition: 1s;
+    border: 1px solid white;
+}
+#imgRight:hover {
+    width: 120%;
+} 
+#right-menu {
+    transition: 0.5s;
+}
+#right-menu:hover {
+    margin-right: 10%;
+}
+#etm {
+    position: fixed;
+    left: 50%;
+    font-size: 40px;
+    transform: translate(-50%, 50%);
+    color: white;
+    font-family: 'Pixelify Sans', cursive;
+}
+.sismic-button {
+    padding: 25px;
+    margin: 10px;
+    font-family: 'Pixelify Sans', cursive;
+    font-size: 20px;
+    background-color: rgb(255, 51, 36);
+}
+#sismic-top-button {
+    padding: 30px;
+    margin: 10px;
+    width: 180px;
+    background-color:  rgb(255, 51, 36);
+    font-family: 'Pixelify Sans', cursive;
+    font-size: 20px;
+}
+#right-chat {
+    width: 350px;
+    height: 400px;
+    border: 1px solid white;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    margin: 10px;
+}
+#chat-input {
+    position: absolute;
+    display: inline-block;
+    border: 1px solid white;
+    color: white;
+    width: 98%;
+    bottom: 0px;
+    background-color: black;
+    height: 30px;
+    text-align: center;
+}
+.chatting {
+    color: rgb(209, 209, 209);
+    margin: 10px;
+}
+#b {
+    float: right;
+    display: inline;
+}
+#bottom-timer {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    color: white;
+    font-family: 'Pixelify Sans', cursive;
+}

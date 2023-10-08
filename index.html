@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore The Moon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+    <h1 id="etm">EXPLORE THE MOON</h1>
+    <div id="left-menu">
+        <button class="button" id="oceansButton" onclick="changeTexture('oceans.jpg')" >Oceans</button>
+        <button class="button" id="landingsButton" onclick="changeTexture('landings.jpg')" >Landings</button>
+        <button class="button" id="xRayButton" onclick="changeTexture('blue.jpg')" >X-Ray</button>
+        <button class="button" id="gridButton" onclick="changeTexture('grid.jpg')" >Grid</button>
+    </div>
+    <div id="sismic-menu">
+        <button id="sismic-top-button"  name="false" onclick="changeTexture('SismicMap.jpg')">Sismic Data</button>
+        <button class="sismic-button" id="a1" name="false" onclick="ChangeButtonColor(this)">A1</button>
+        <button class="sismic-button" id="a2" name="false" onclick="ChangeButtonColor(this)">A2</button>
+        <button class="sismic-button" id="a3" name="false" onclick="ChangeButtonColor(this)">A3</button>
+        <button class="sismic-button" id="a4" name="false" onclick="ChangeButtonColor(this)" >A4</button>
+        <button class="sismic-button" id="a5" name="false" onclick="ChangeButtonColor(this)">A5</button>
+        <button class="sismic-button" id="a6" name="false" onclick="ChangeButtonColor(this)">A6</button>
+        <button class="sismic-button" id="a7" name="false" onclick="ChangeButtonColor(this)">A7</button>
+        <button class="sismic-button" id="a8" name="false" onclick="ChangeButtonColor(this)">A8</button>
+    </div>
+    <div id="right-menu">
+        <img src="manInSpace.jpg" id="imgRight" alt="not supported">
+    </div>
+    <div id="bottom-p-div">
+    <p id="bottom-timer">Sun Oct 08 2023 14:00:21 GMT+0300 (GMT+03:00), Axis tilt - 1,5424°, Average orbital speed - 1,022 km/sn</p>
+</div>
+    <div id="right-chat">
+        <p class="chatting" id="a">Emilia -- Hello guys!</p>
+        <p class="chatting" id="b">Hey! What's Up -- Furkan</p>
+        <p class="chatting" id="b">Ahmet -- Did you like the X-ray position Sismic Data?</p>
+        <input id="chat-input" type="text" placeholder="Chat with the others!">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+    <script>
+        let timerP = document.getElementById('bottom-timer');
+        setInterval(() => {
+        let currentTimeDate = new Date();
+        timerP.innerHTML = currentTimeDate + ' ' + ',   Axis tilt - 1,5424°, Average orbital speed - 1,022 km/sn';
+        }, 1000);
+        let isOceanButtonTrue = false;
+        let isXrayButtonTrue = false;
+        let isLandingButtonTrue = false;
+        let isGridButtonTrue = false;
+        let isSismicMapTrue = false;
+        const imgRight = document.getElementById('imgRight');
+        const oceansButton = document.getElementById('oceansButton');
+        const xRayButton = document.getElementById('xRayButton');
+        const landingsButton = document.getElementById('landingsButton');
+        const gridButton = document.getElementById('gridButton');
+        const sismic_top_button = document.getElementById('sismic-top-button');
+
+        //Change Sismic Button Color
+        function ChangeButtonColor(element){
+            if(element.name == 'true'){
+                element.style.backgroundColor = 'rgb(255, 51, 36)';
+                element.name = 'false';
+            }
+            else if(element.name == 'false'){
+                element.style.backgroundColor = 'rgb(76, 255, 76';
+                imgRight.src = `${element.id}.jpg`;
+                element.name = 'true';
+                
+            }
+        }
+
+        // Set up the scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Create a sphere
+        const geometry = new THREE.SphereGeometry(2, 32, 32);
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load('normal.jpg'); // Replace with the actual path to your image
+        const material = new THREE.MeshBasicMaterial({ map: texture });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+
+        // Set the initial camera position
+        camera.position.z = 5;
+
+        // Variables for mouse interaction
+        let isDragging = false;
+        let previousMousePosition = {
+            x: 0,
+            y: 0
+        };
+
+        // Variables for smooth animation
+        const targetRotation = { x: 0, y: 0 };
+        const rotationSpeed = 0.005;
+        const smoothness = 0.05; // Adjust the smoothness factor
+
+        // Update targetRotation based on mouse interaction
+        document.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            previousMousePosition = {
+                x: event.clientX,
+                y: event.clientY
+            };
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!isDragging) return;
+
+            const deltaMove = {
+                x: event.clientX - previousMousePosition.x,
+                y: event.clientY - previousMousePosition.y
+            };
+
+            targetRotation.x += deltaMove.y * rotationSpeed;
+            targetRotation.y += deltaMove.x * rotationSpeed;
+
+            previousMousePosition = {
+                x: event.clientX,
+                y: event.clientY
+            };
+        });
+
+        // Smoothly interpolate rotation towards targetRotation
+        const animateRotation = () => {
+            sphere.rotation.x += (targetRotation.x - sphere.rotation.x) * smoothness;
+            sphere.rotation.y += (targetRotation.y - sphere.rotation.y) * smoothness;
+
+            requestAnimationFrame(animateRotation);
+        };
+
+        animateRotation();
+
+        // Function to change the sphere texture
+        function changeTexture(newTexturePath) {
+            let newTexture = textureLoader.load('normal.jpg');
+
+            
+            //making red and the green colors of the buttons
+            if(newTexturePath == 'oceans.jpg'){
+                imgRight.src = 'RightOceans.jpg';
+                isOceanButtonTrue = !isOceanButtonTrue;
+                console.log(isOceanButtonTrue);
+                if(isOceanButtonTrue == true) {
+                    oceansButton.style.backgroundColor = 'rgb(76, 255, 76)';
+                }
+                else if(isOceanButtonTrue == false){
+                    oceansButton.style.backgroundColor = 'rgb(255, 51, 36)';
+                }
+            }
+            else if(newTexturePath == 'blue.jpg'){
+                isXrayButtonTrue = !isXrayButtonTrue;
+                console.log(isXrayButtonTrue);
+                if(isXrayButtonTrue == true) {
+                    xRayButton.style.backgroundColor = 'rgb(76, 255, 76)';
+                }
+                else if(isXrayButtonTrue == false){
+                    xRayButton.style.backgroundColor = 'rgb(255, 51, 36)';
+                }
+            }
+            else if(newTexturePath == 'SismicMap.jpg'){
+                isSismicMapTrue = !isSismicMapTrue;
+                console.log(isSismicMapTrue);
+                if(isSismicMapTrue == true) {
+                    newTexture = textureLoader.load('SismicMap.jpg');
+                    sismic_top_button.style.backgroundColor = 'rgb(76, 255, 76)';
+                }
+                else if(isXrayButtonTrue == false){
+                    newTexture = textureLoader.load('normal.jpg');
+                    sismic_top_button.style.backgroundColor = 'rgb(255, 51, 36)';
+                }
+            }
+            else if(newTexturePath == 'landings.jpg'){
+                imgRight.src = 'Alllandings.jpg';
+                isLandingButtonTrue = !isLandingButtonTrue;
+                console.log(isLandingButtonTrue);
+                if(isLandingButtonTrue == true) {
+                    landingsButton.style.backgroundColor = 'rgb(76, 255, 76)';
+                }
+                else if(isLandingButtonTrue == false){
+                    landingsButton.style.backgroundColor = 'rgb(255, 51, 36)';
+                }
+            }
+            else if(newTexturePath == 'grid.jpg'){
+                isGridButtonTrue = !isGridButtonTrue;
+                console.log(isGridButtonTrue);
+                if(isGridButtonTrue == true) {
+                    gridButton.style.backgroundColor = 'rgb(76, 255, 76)';
+                }
+                else if(isGridButtonTrue == false){
+                    gridButton.style.backgroundColor = 'rgb(255, 51, 36)';
+                }
+            }
+            //we can control the image situation below. 
+            if(isOceanButtonTrue == true && isXrayButtonTrue == false && isLandingButtonTrue == false && isGridButtonTrue == false){
+                newTexture = textureLoader.load('oceans.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == true && isLandingButtonTrue == false && isGridButtonTrue == false){
+                newTexture = textureLoader.load('blue.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == false && isLandingButtonTrue == true && isGridButtonTrue == false){
+                newTexture = textureLoader.load('landings.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == false && isLandingButtonTrue == false && isGridButtonTrue == true){
+                newTexture = textureLoader.load('grid.jpg');
+            }//1
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == true && isLandingButtonTrue == true && isGridButtonTrue == false){
+                newTexture = textureLoader.load('blue-landings.jpg');
+            }
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == false && isLandingButtonTrue == true && isGridButtonTrue == false){
+                newTexture = textureLoader.load('landings-oceans.jpg');
+            }
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == true && isLandingButtonTrue == false && isGridButtonTrue == false){
+                newTexture = textureLoader.load('oceanAndXray.jpg');
+            }
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == false && isLandingButtonTrue == false && isGridButtonTrue == true){
+                newTexture = textureLoader.load('oceans-grid.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == true && isLandingButtonTrue == false && isGridButtonTrue == true){
+                newTexture = textureLoader.load('xRay-grid.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == false && isLandingButtonTrue == true && isGridButtonTrue == true){
+                newTexture = textureLoader.load('landings-grid.jpg');
+            }//2
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == true && isLandingButtonTrue == true && isGridButtonTrue == false){
+                newTexture = textureLoader.load('oceans-landings-xray.jpg');
+            }
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == false && isLandingButtonTrue == true && isGridButtonTrue == true){
+                newTexture = textureLoader.load('oceans-landings-grid.jpg');
+            }
+            else if(isOceanButtonTrue == false && isXrayButtonTrue == true && isLandingButtonTrue == true && isGridButtonTrue == true){
+                newTexture = textureLoader.load('xRay-landings-grid.jpg'); 
+            }
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == true && isLandingButtonTrue == false && isGridButtonTrue == true){
+                newTexture = textureLoader.load('oceans-xRay-grid.jpg');
+            }//3
+            else if(isOceanButtonTrue == true && isXrayButtonTrue == true && isLandingButtonTrue == true && isGridButtonTrue == true){
+                newTexture = textureLoader.load('oceans-xRay-landing-grid.jpg');
+            }//4
+            
+
+            // Update the texture of the sphere's material
+            sphere.material.map = newTexture;
+            sphere.material.needsUpdate = true;
+
+        }
+
+        // Add lighting to the scene
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
+
+        // Render loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Render the scene
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</body>
+</html>
