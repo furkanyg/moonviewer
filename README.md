@@ -5,4 +5,4 @@
 ![site gosterim](https://github.com/furkanyg/moonviewer/assets/88043406/17db2a26-60f7-46f7-9029-38528fc097e6)
 ![dikey](https://github.com/furkanyg/moonviewer/assets/88043406/04de7e1c-81c5-414a-a10b-b4b4f5ba2b02)
 ![allin one](https://github.com/furkanyg/moonviewer/assets/88043406/ec2f0c22-8f32-4ede-b146-8628c5c711c1)
-That was pretty good project, I wish i could go there again!!
+Moon's sismic data viewer for Nasa Space Apps Challange.
